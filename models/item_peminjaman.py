@@ -10,6 +10,7 @@ class ItemPeminjaman:
 
     def __init__(self, alat: Alat) -> None:
         self.alat: Alat = alat
+        self.transaksi = transaksi
         self.status: str = self.STATUS_DIPINJAM
         self.kondisi_kembali: Optional[str] = None
         self.tanggal_kembali: Optional[datetime] = None
