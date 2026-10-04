@@ -1,4 +1,4 @@
-from admin import Admin
+from models.admin import Admin
 
 class AsistenLabMahasiwa(Admin):
     def __init__(self, nim, username,password, jabatan="Asisten Lab"):
