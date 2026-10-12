@@ -1,12 +1,15 @@
+from typing import Dict, Optional, Union
+from models.mahasiswa import Mahasiswa
+
 class ManajemenMahasiswa:
     def __init__(self) -> None:
         self.__data: Dict[str, Mahasiswa] = {}
 
-    def verifikasi_login(self, username: str, password: str) -> bool:
-        mahasiswa = self.__data.get(username)
+    def verifikasi_login(self, nim: str, nama: str) -> bool:
+        mahasiswa = self.__data.get(nim)
         if mahasiswa is None:
             return False
-        return mahasiswa.login(username, password)
+        return mahasiswa.login(nim, nama)
 
     def tambah(self, mahasiswa: Mahasiswa) -> bool:
         if mahasiswa.nim in self.__data:
@@ -16,3 +19,34 @@ class ManajemenMahasiswa:
 
     def cari(self, nim: str) -> Optional[Mahasiswa]:
         return self.__data.get(nim)
+
+    def edit(self, nim: str, nama_baru: str) -> bool:
+        if nim in self.__data:
+            self.__data[nim].nama = nama_baru
+            return True
+        return False
+
+    def hapus(self, nim: str) -> Union[bool, str]:
+        if nim in self.__data:
+            if self.__data[nim].status_peminjaman:
+                return "GAGAL_MASIH_MEMINJAM"
+            del self.__data[nim]
+            return True
+        return False
+
+    def tampilkan_semua(self) -> bool:
+        if not self.__data:
+            print("[-] Belum ada data mahasiswa.")
+            return False
+
+        print("\n=== DAFTAR MAHASISWA ===")
+        print("-" * 56)
+        print(f"| {'NIM':<10} | {'Nama Mahasiswa':<20} | {'Status':<15} |")
+        print("-" * 56)
+
+        for mhs in self.__data.values():
+            status = "Sedang Meminjam" if mhs.status_peminjaman else "Tidak Meminjam"
+            print(f"| {mhs.nim:<10} | {mhs.nama:<20} | {status:<15} |")
+
+        print("-" * 56)
+        return True
