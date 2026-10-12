@@ -5,6 +5,10 @@ class ManajemenMahasiswa:
     def __init__(self) -> None:
         self.__data: Dict[str, Mahasiswa] = {}
 
+    @property
+    def data(self) -> Dict[str, Mahasiswa]:
+        return self.__data
+
     def verifikasi_login(self, nim: str, nama: str) -> bool:
         mahasiswa = self.__data.get(nim)
         if mahasiswa is None:
@@ -33,20 +37,3 @@ class ManajemenMahasiswa:
             del self.__data[nim]
             return True
         return False
-
-    def tampilkan_semua(self) -> bool:
-        if not self.__data:
-            print("[-] Belum ada data mahasiswa.")
-            return False
-
-        print("\n=== DAFTAR MAHASISWA ===")
-        print("-" * 56)
-        print(f"| {'NIM':<10} | {'Nama Mahasiswa':<20} | {'Status':<15} |")
-        print("-" * 56)
-
-        for mhs in self.__data.values():
-            status = "Sedang Meminjam" if mhs.status_peminjaman else "Tidak Meminjam"
-            print(f"| {mhs.nim:<10} | {mhs.nama:<20} | {status:<15} |")
-
-        print("-" * 56)
-        return True
