@@ -95,10 +95,10 @@ class MenuCLI:
                     print(f"[+] Admin {username} berhasil didaftarkan!")
 
             elif pilihan == "2":
-                self.sistem.manajemen_admin.tampilkan_semua()
+                self.tampilkan_semua_admin()
 
             elif pilihan == "3":
-                if self.sistem.manajemen_admin.tampilkan_semua():
+                if self.tampilkan_semua_admin():
                     username = input("\nMasukkan Username admin yang ingin diedit: ")
                     if self.sistem.manajemen_admin.cari(username):
                         password_baru = input("Masukkan Password baru: ")
@@ -108,7 +108,7 @@ class MenuCLI:
                         print("[-] Admin tidak ditemukan.")
 
             elif pilihan == "4":
-                if self.sistem.manajemen_admin.tampilkan_semua():
+                if self.tampilkan_semua_admin():
                     username = input("\nMasukkan Username admin yang ingin dihapus: ")
                     if username == self.sistem.user_aktif.username:
                         print(
@@ -144,10 +144,10 @@ class MenuCLI:
                     print(f"[+] Mahasiswa {nama} berhasil didaftarkan!")
 
             elif pilihan == "2":
-                self.sistem.manajemen_mahasiswa.tampilkan_semua()
+                self.tampilkan_semua_mahasiswa()
 
             elif pilihan == "3":
-                if self.sistem.manajemen_mahasiswa.tampilkan_semua():
+                if self.tampilkan_semua_mahasiswa():
                     nim = input("\nMasukkan NIM mahasiswa yang ingin diedit: ")
                     nama_baru = input("Masukkan Nama baru: ")
                     if self.sistem.manajemen_mahasiswa.edit(nim, nama_baru):
@@ -156,7 +156,7 @@ class MenuCLI:
                         print("[-] Mahasiswa tidak ditemukan.")
 
             elif pilihan == "4":
-                if self.sistem.manajemen_mahasiswa.tampilkan_semua():
+                if self.tampilkan_semua_mahasiswa():
                     nim = input("\nMasukkan NIM mahasiswa yang ingin dihapus: ")
                     hasil = self.sistem.manajemen_mahasiswa.hapus(nim)
                     if hasil == "GAGAL_MASIH_MEMINJAM":
@@ -234,6 +234,43 @@ class MenuCLI:
                 break
             else:
                 print("[-] Pilihan tidak valid.")
+
+    def tampilkan_semua_admin(self):
+        data_admin = self.sistem.manajemen_admin.data
+        if not data_admin:
+            print("[-] Belum ada data admin/staff.")
+            return False
+
+        print("\n=== DAFTAR ADMIN & STAFF ===")
+        print("-" * 65)
+        print(f"| {'ID / NIP / NIM':<18} | {'Username':<15} | {'Jabatan':<20} |")
+        print("-" * 65)
+
+        for admin in data_admin.values():
+            print(
+                f"| {admin.id_admin:<18} | {admin.username:<15} | {admin.jabatan:<20} |"
+            )
+
+        print("-" * 65)
+        return True
+
+    def tampilkan_semua_mahasiswa(self):
+        data_mhs = self.sistem.manajemen_mahasiswa.data
+        if not data_mhs:
+            print("[-] Belum ada data mahasiswa.")
+            return False
+
+        print("\n=== DAFTAR MAHASISWA ===")
+        print("-" * 56)
+        print(f"| {'NIM':<10} | {'Nama Mahasiswa':<20} | {'Status':<15} |")
+        print("-" * 56)
+
+        for mhs in data_mhs.values():
+            status = "Sedang Meminjam" if mhs.status_peminjaman else "Tidak Meminjam"
+            print(f"| {mhs.nim:<10} | {mhs.nama:<20} | {status:<15} |")
+
+        print("-" * 56)
+        return True
 
     def tampilkan_semua_transaksi(self):
         data_trx = self.sistem.manajemen_transaksi.data
@@ -405,4 +442,5 @@ class MenuCLI:
             print(
                 f"| {alat.kode:<8} | {alat.nama:<30} | {alat.kategori:<18} | {alat.status:<15} | {alat.kondisi:<15} |"
             )
+
         print("-" * 102)
