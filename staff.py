@@ -1,4 +1,4 @@
-from models.admin import Admin
+from admin import Admin
 
 class Staff(Admin):
     def __init__(self, nip, username, password, jabatan="Staff"):

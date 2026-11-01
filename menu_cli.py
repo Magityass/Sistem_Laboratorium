@@ -1,6 +1,6 @@
-from models.alat import Alat
-from models.mahasiswa import Mahasiswa
-from models.staff import Staff
+from alat import Alat
+from mahasiswa import Mahasiswa
+from staff import Staff
 
 
 class MenuCLI:

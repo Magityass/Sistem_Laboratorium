@@ -1,5 +1,5 @@
-from models.transaksi import Transaksi
-from models.item_peminjaman import ItemPeminjaman
+from transaksi import Transaksi
+from item_peminjaman import ItemPeminjaman
 from datetime import datetime
 
 class ManajemenTransaksi:

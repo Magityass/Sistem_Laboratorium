@@ -1,10 +1,10 @@
 from typing import Optional, Union
-from services.manajemen_admin import ManajemenAdmin
-from services.manajemen_mahasiswa import ManajemenMahasiswa
-from services.manajemen_alat import ManajemenAlat
-from services.manajemen_transaksi import ManajemenTransaksi
-from models.admin import Admin
-from models.mahasiswa import Mahasiswa
+from manajemen_admin import ManajemenAdmin
+from manajemen_mahasiswa import ManajemenMahasiswa
+from manajemen_alat import ManajemenAlat
+from manajemen_transaksi import ManajemenTransaksi
+from admin import Admin
+from mahasiswa import Mahasiswa
 
 class SistemPeminjaman:
     def __init__(self) -> None:

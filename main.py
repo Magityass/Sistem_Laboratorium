@@ -1,8 +1,8 @@
-from models.staff import Staff
-from models.mahasiswa import Mahasiswa
-from models.alat import Alat
-from services.sistem_peminjaman import SistemPeminjaman
-from ui.menu_cli import MenuCLI
+from staff import Staff
+from mahasiswa import Mahasiswa
+from alat import Alat
+from sistem_peminjaman import SistemPeminjaman
+from menu_cli import MenuCLI
 
 def inisialisasi_data_dummy(sistem):
     staff_lab = Staff(nip="192837", username="admin", password="123")
