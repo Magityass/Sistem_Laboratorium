@@ -1,5 +1,5 @@
 from typing import Dict, Optional, Union
-from models.mahasiswa import Mahasiswa
+from mahasiswa import Mahasiswa
 
 class ManajemenMahasiswa:
     def __init__(self) -> None:
