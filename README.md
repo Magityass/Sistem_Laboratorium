@@ -1,35 +1,24 @@
 # Sistem Peminjaman Laboratorium CLI
 
-Aplikasi CLI (Command Line Interface) berbasis Python untuk mengelola operasional peminjaman alat di laboratorium. Proyek ini dibangun dengan menerapkan prinsip *Object-Oriented Programming* (OOP) tingkat lanjut, termasuk *Inheritance*, *Composition*, dan *Facade/Controller Pattern*. 
+Aplikasi CLI (Command Line Interface) berbasis Python untuk mengelola operasional peminjaman alat di laboratorium. Proyek ini dibangun dengan menerapkan prinsip *Object-Oriented Programming*
 
 ## 📁 Struktur Proyek
 
 ```text
-sistem-peminjaman-lab/
-│
-├── .gitignore
-├── README.md
-├── requirements.txt
-├── main.py
-│
-├── models/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── staff.py
-│   ├── asisten_lab_mahasiswa.py
-│   ├── mahasiswa.py
-│   ├── alat.py
-│   ├── transaksi.py
-│   └── item_peminjaman.py
-│
-├── services/
-│   ├── __init__.py
-│   ├── manajemen_admin.py
-│   ├── manajemen_mahasiswa.py
-│   ├── manajemen_alat.py
-│   ├── manajemen_transaksi.py
-│   └── sistem_peminjaman.py
-│
-└── ui/
-    ├── __init__.py
-    └── menu_cli.py
+Sistem_Laboratorium/
+├── admin.py                  # Base class / Parent class Admin
+├── alat.py                   # Entitas Alat/Aset Lab
+├── asisten_lab_mahasiswa.py  # Child class turunan dari Admin
+├── item_peminjaman.py        # Relasi komposisi detail kondisi alat per transaksi
+├── mahasiswa.py              # Entitas Mahasiswa
+├── main.py                   # Entry point aplikasi & inisialisasi Dummy Data
+├── manajemen_admin.py        # Layanan CRUD Admin
+├── manajemen_alat.py         # Layanan CRUD Alat
+├── manajemen_mahasiswa.py    # Layanan CRUD Mahasiswa
+├── manajemen_transaksi.py    # Layanan pemrosesan peminjaman & pengembalian
+├── menu_cli.py               # View/UI untuk interaksi pengguna di terminal
+├── README.md                 # Dokumentasi
+├── requirements.txt          # Daftar dependensi modul
+├── sistem_peminjaman.py      # Facade pattern penggabung seluruh layanan (Core System)
+├── staff.py                  # Child class turunan dari Admin (Staff Lab)
+└── transaksi.py              # Entitas Transaksi utama
